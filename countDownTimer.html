@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Down</title>
+    <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.css">
+</head>
+<body>
+
+    <style>
+        input{
+            border-top: none ;
+            border-right: none ;
+            border-left: none ;
+            outline:none
+        }
+    </style>
+
+    <div class="text-center mt-5">
+       <div class="row">
+            <div id="error" class="my-3"></div>
+           <div class=" p-3 shadow-lg w-50 mx-auto ">
+                <input type="text" class="text-center" placeholder="HH" id="hours" style="width: 35px;"> :
+                <input type="text"  class="text-center" placeholder="MM" id="minutes" style="width: 35px;"> :
+                <input type="text"  class="text-center" placeholder="SS" id="seconds" id="sd" style="width: 35px;"><br>
+
+                <button class="btn btn-primary my-2" onclick="start()">START</button>
+           </div> <br>
+        </div>
+    </div>
+
+    <script>
+        const start = () => {
+            if(hours.value == "" && minutes.value == "" && seconds.value == ""){
+                error.innerHTML = `<b class="text-primary">Please, set your count down first</b>`
+                
+                setTimeout(() => {error.innerHTML = ""},3000)
+            }else{
+                if(seconds.value > 0){
+                    seconds.value --
+                    setTimeout(start, 1000)
+                }else if(seconds.value == 0){
+                    if(minutes.value > 0){
+                        minOw()
+                        seconds.value = 6
+                        start()
+                    }
+                }
+            }
+        }
+        
+        const minOw = () => {
+            if(minutes.value > 0){
+                minutes.value -- 
+                hr()
+            }
+        }
+
+        const hr = () => {
+            if(hours.value > 0){
+
+                if(minutes.value == 0){
+                    hours.value --
+                    minutes.value = 5
+                }
+            }
+            get()
+        }
+
+        const get = () => {
+            if(hours.value == 0 && minutes.value == 0 && seconds.value == 0){
+                setTimeout(() => {
+                    error.innerHTML = `<h3 class="text-info">Count Down has stopped</h3>`
+                }, 6000,);
+
+                hours.value = ""
+                minutes.value = ""
+                seconds.value = ""
+            }
+        }
+    </script>
+</body>
+</html>
